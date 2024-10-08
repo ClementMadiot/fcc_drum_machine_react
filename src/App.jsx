@@ -12,10 +12,10 @@ function App() {
           </div>
         ))}
       </div>
-      <div id="pad">
-        <div className="logo">FCC&nbsp;
+        <div className="logo">FCC
           <i class="inner-logo fa fa-free-code-camp"></i>
         </div>
+      <div id="pad">
         <div id="display">&nbsp;</div>
       </div>
     </main>

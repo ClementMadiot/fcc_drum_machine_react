@@ -1,3 +1,28 @@
+@import url("https://fonts.googleapis.com/css2?family=Russo+One&display=swap");
+
+:root {
+  --font-Russo: "Russo One", sans-serif;
+  --bg-i-drum: linear-gradient(to top, #fddb92 0%, #d1fdff 100%);
+  --bg-pad: linear-gradient(to left, #bdbbbe 0%, #9d9ea3 100%),
+    radial-gradient(
+      88% 271%,
+      rgba(255, 255, 255, 0.25) 0%,
+      rgba(254, 254, 254, 0.25) 1%,
+      rgba(0, 0, 0, 0.25) 100%
+    ),
+    radial-gradient(
+      50% 100%,
+      rgba(255, 255, 255, 0.3) 0%,
+      rgba(0, 0, 0, 0.3) 100%
+    );
+  --bg-btn: radial-gradient(73% 147%, #eadfdf 59%, #ece2df 100%),
+    radial-gradient(
+      91% 146%,
+      rgba(255, 255, 255, 0.5) 47%,
+      rgba(0, 0, 0, 0.5) 100%
+    );
+}
+
 *,
 ::before,
 ::after {
@@ -11,15 +36,88 @@
   font-size: $font-size;
 }
 
-@mixin flex($justify-content, $flex-direction) {
+@mixin flex($justify-content, $align-items) {
   display: flex;
   justify-content: $justify-content;
-  align-items: center;
-  flex-direction: $flex-direction;
+  align-items: $align-items;
+}
+
+@mixin content($border-radius) {
+  background-image: var(--bg-btn);
+  background-blend-mode: screen;
+  border: none;
+  border-radius: $border-radius;
+  box-shadow: 0 9px #999;
+  outline: none;
+}
+
+body {
+  @include flex(center, center);
+  margin-top: 5rem;
+  min-height: 100vh;
+  background-size: cover;
+  padding: 2rem;
+  background-image: var(--bg-i-drum);
 }
 
 main {
-  @include flex(center, column);
-  margin-top: 5rem;
-  padding: 2rem;
+  background-image: var(--bg-pad);
+  background-blend-mode: normal, lighten, soft-light;
+  width: 660px;
+  text-align: center;
+  @include flex(space-evenly, center);
+  font-family: var(--font-Russo);
+  border-radius: 4px;
+  position: relative;
+}
+
+#drum-machine {
+  display: grid;
+  grid-template-columns: 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px;
+  align-items: center;
+  gap: 10px;
+
+  .drum-pad {
+    @include flex(center, center);
+    @include content(8px);
+    height: 80%;
+    
+    cursor: pointer;
+    &:hover {
+      background-color: #3e8e41;
+    }
+    &:active {
+      background-color: #3e8e41;
+      box-shadow: 0 5px #666;
+      transform: translateY(4px);
+    }
+  }
+}
+
+.logo {
+  margin-top: 1rem;
+  font-style: italic;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 15px;
+  i {
+    font-weight: bold;
+    font-style: italic;
+    font-size: 20px;
+  }
+}
+#pad {
+  display: flex;
+  justify-content: center;
+  
+  #display {
+    @include content(3px);
+    width: 200px;
+    font-size: 1rem;
+    font-weight: bold;
+    padding: 15px;
+  }
 }
