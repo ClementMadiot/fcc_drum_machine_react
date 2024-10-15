@@ -1,48 +1,57 @@
 const audioData = [
   {
-    id: "heater1",
+    id: 0,
+    title: "heater1",
     letter: "Q",
-    song: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-1.mp3"
+    src: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-1.mp3"
   },
   {
-    id: "heater2",
+    id: 1,
+    title: "heater2",
     letter: "W",
-    song: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-2.mp3"
+    src: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-2.mp3"
   },
   {
-    id: "heater3",
+    id: 2,
+    title: "heater3",
     letter: "E",
-    song: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-3.mp3"
+    src: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-3.mp3"
   },
   {
-    id: "heater4",
+    id: 3,
+    title: "heater4",
     letter: "A",
-    song: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-4_1.mp3"
+    src: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-4_1.mp3"
   },
   {
-    id: "clap",
+    id: 4,
+    title: "clap",
     letter: "S",
-    song: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-6.mp3"
+    src: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Heater-6.mp3"
   },
   {
-    id: "openHH",
+    id: 5,
+    title: "openHH",
     letter: "D",
-    song: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Dsc_Oh.mp3"
+    src: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Dsc_Oh.mp3"
   },
   {
-    id: "kickHat",
+    id: 6,
+    title: "kickHat",
     letter: "Z",
-    song: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Kick_n_Hat.mp3"
+    src: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Kick_n_Hat.mp3"
   },
   {
-    id: "kick",
+    id: 7,
+    title: "kick",
     letter: "X",
-    song: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/RP4_KICK_1.mp3"
+    src: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/RP4_KICK_1.mp3"
   },
   {
-    id: "closedHH",
+    id: 8,
+    title: "closedHH",
     letter: "C",
-    song: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Cev_H2.mp3"
+    src: "https://cdn.freecodecamp.org/testable-projects-fcc/audio/Cev_H2.mp3"
   }
 ];
 
