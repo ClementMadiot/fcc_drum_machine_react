@@ -23,10 +23,10 @@ function App() {
 
   const keyDown = (e) => {
     const currentLetter = audioData.find(
-      (item) => item.letter.toLowerCase() === e.key
+      (item) => item.letter === e.key.toUpperCase()
     );
-    console.log(`key press : ${e.key}, ${currentLetter.letter}`);
     if (currentLetter.letter) {
+      console.log(`key press : ${e.key.toUpperCase()}, ${currentLetter.letter}`);
       playDrum(currentLetter.src);
       displayCurrentDrum(currentLetter.title);
     } else {
