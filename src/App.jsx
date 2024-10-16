@@ -22,12 +22,16 @@ function App() {
   };
 
   const keyDown = (e) => {
-    const currentLetter = audioData.find((item) => item.letter === e.key);
+    const currentLetter = audioData.find(
+      (item) => item.letter.toLowerCase() === e.key
+    );
     console.log(`key press : ${e.key}, ${currentLetter.letter}`);
     if (currentLetter.letter) {
-      return playDrum(currentLetter.src);
+      playDrum(currentLetter.src);
+      displayCurrentDrum(currentLetter.title);
+    } else {
+      console.log("No matching letter found");
     }
-    return console.log("No matching letter found");
   };
 
   document.addEventListener("keydown", keyDown);
