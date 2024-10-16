@@ -1,28 +1,36 @@
 import audioData from "./data/drumAudio";
 import "./style/App.scss";
 
-
-
 function App() {
+  const audio = new Audio();
 
-const audio = new Audio();
-  
   const drumMachine = (item) => {
-    const { src, title } = item
+    const { src, title } = item;
 
-    audio.src = src
-
-    currentSong(title)
-    audio.play()
+    displayCurrentDrum(title);
+    return playDrum(src);
   };
-  
-  const currentSong = (item) => {
+
+  const playDrum = (src) => {
+    audio.src = src;
+    audio.play();
+  };
+
+  const displayCurrentDrum = (item) => {
     const display = document.getElementById("display");
-    
-    display.textContent = item ? item : ""
+    display.textContent = item ? item : "";
   };
 
+  const keyDown = (e) => {
+    const currentLetter = audioData.find((item) => item.letter === e.key);
+    console.log(`key press : ${e.key}, ${currentLetter.letter}`);
+    if (currentLetter.letter) {
+      return playDrum(currentLetter.src);
+    }
+    return console.log("No matching letter found");
+  };
 
+  document.addEventListener("keydown", keyDown);
 
   return (
     <main>
@@ -31,8 +39,9 @@ const audio = new Audio();
           <div
             key={`pad-${index}`}
             className="drum-pad"
-            id={item.id}
+            id={`button-${item.id}`}
             onClick={() => drumMachine(item)}
+            onKeyDown={keyDown}
           >
             <audio className="clip" id={item.letter} src={item.src}></audio>
             {item.letter}
