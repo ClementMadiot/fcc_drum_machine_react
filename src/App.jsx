@@ -22,7 +22,7 @@ function App() {
   };
 
   const keyDown = (e) => {
-    const currentLetter = audioData.find((item) => item.letter === e.key);
+    const currentLetter = audioData.find((item) => item.letter.toLowerCase() === e.key.toLowerCase());
     console.log(`key press : ${e.key}, ${currentLetter.letter}`);
     if (currentLetter.letter) {
       return playDrum(currentLetter.src);
