@@ -91,7 +91,6 @@ main {
     @include flex(center, center);
     @include content(8px);
     height: 80%;
-    text-transform: capitalize;
 
     cursor: pointer;
     &:hover {
