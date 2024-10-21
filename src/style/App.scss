@@ -123,9 +123,14 @@ main {
   }
 }
 #pad {
-  display: flex;
-  justify-content: center;
+  @include flex(center, center);
+  flex-direction: column;
+  gap: 2rem;
 
+.form-label {
+  @include flex(center, center);
+  margin: 1rem 0;
+}
   #display {
     @include content(3px);
     width: 200px;

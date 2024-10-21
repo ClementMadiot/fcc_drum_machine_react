@@ -1,31 +1,46 @@
+import { useEffect, useState } from "react";
 import audioData from "./data/drumAudio";
 import "./style/App.scss";
 
 function App() {
-  const audio = new Audio();
-
+  const [volume, setVolume] = useState(5);
+  
   const drumMachine = (event) => {
     try {
       const drumKeyCode = audioData.find(
         (item) => item.key === event.key || item.key === event.target.innerText
       );
-      displayCurrentDrum(drumKeyCode.title);
+      if (!drumKeyCode) {
+        return;
+      }
+
+      updateDisplay(drumKeyCode.id);
       playNote(drumKeyCode);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const displayCurrentDrum = (item) => {
+  const updateDisplay = (item) => {
     const display = document.getElementById("display");
-    display.textContent = item ? item : "";
+    if (display) {
+      display.textContent = item ? item : "";
+    } else {
+      console.warn("Display element not found")
+    }
+  };
+
+  const adjustVolume = (e) => {
+    setVolume(e.target.value);
   };
 
   const playNote = (item) => {
+
+    const audio = new Audio();
     audio.src = item.src;
-    audio.currentTime = 0;
+    audio.volume = volume / 10; // Normalize volume to 0-1 range
+    audio.currentTime = 0; // Reset playback position
     audio.play();
-    console.log(audio);
   };
 
   const keyDown = (event) => {
@@ -37,7 +52,7 @@ function App() {
         console.log(
           `key press: ${event.key.toUpperCase()} | key pad: ${currentKey.key}`
         );
-        displayCurrentDrum(currentKey.title);
+        updateDisplay(currentKey.id);
         playNote(currentKey);
       } else {
         console.log(`No matching key found "${event.key.toUpperCase()}"`);
@@ -46,21 +61,26 @@ function App() {
       console.log(error);
     }
   };
-
-  document.addEventListener("keydown", keyDown);
+  useEffect(() => {
+    document.addEventListener("keydown", keyDown);
+    return () => {
+      document.removeEventListener("keydown", keyDown);
+    };
+  });
 
   return (
     <main>
       <div id="drum-machine">
-        {audioData.map((item, index) => (
+        {audioData.map((item) => (
           <div
-            key={index}
+            key={item.id}
             className="drum-pad"
             id={item.id}
             onClick={(e) => drumMachine(e)}
+            
           >
             {item.key}
-            <audio className="clip" id={item.key} src={item.src}></audio>
+            <audio id={item.key} src={item.src} className="clip" />
           </div>
         ))}
       </div>
@@ -70,6 +90,21 @@ function App() {
       </div>
       <div id="pad">
         <div id="display">&nbsp;</div>
+        <div className="control-volume">
+          <label htmlFor="volume" className="form-label">
+            Volume: {volume}
+          </label>
+          <input
+            type="range"
+            className="form-range"
+            min="1"
+            max="10"
+            step="0.5"
+            id="volume"
+            value={volume}
+            onChange={adjustVolume}
+          />
+        </div>
       </div>
     </main>
   );
