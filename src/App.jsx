@@ -10,9 +10,6 @@ function App() {
       const drumKeyCode = audioData.find(
         (item) => item.key === event.key || item.key === event.target.innerText
       );
-      if (!drumKeyCode) {
-        return;
-      }
 
       updateDisplay(drumKeyCode.id);
       playNote(drumKeyCode);
@@ -35,7 +32,6 @@ function App() {
   };
 
   const playNote = (item) => {
-
     const audio = new Audio();
     audio.src = item.src;
     audio.volume = volume / 10; // Normalize volume to 0-1 range
@@ -58,7 +54,7 @@ function App() {
         console.log(`No matching key found "${event.key.toUpperCase()}"`);
       }
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   useEffect(() => {
