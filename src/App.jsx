@@ -24,6 +24,7 @@ function App() {
       display.textContent = item ? item : "";
     } else {
       console.warn("Display element not found")
+      updateDisplay("Display element not found")
     }
   };
 
@@ -51,7 +52,7 @@ function App() {
         updateDisplay(currentKey.id);
         playNote(currentKey);
       } else {
-        console.log(`No matching key found "${event.key.toUpperCase()}"`);
+        updateDisplay(`No matching key found "${event.key.toUpperCase()}"`)
       }
     } catch (error) {
       console.error(error);
