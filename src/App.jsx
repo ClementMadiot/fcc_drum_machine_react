@@ -4,16 +4,16 @@ import "./style/App.scss";
 function App() {
   const audio = new Audio();
 
-  const drumMachine = (item) => {
-    const { src, title } = item;
-
-    displayCurrentDrum(title);
-    return playDrum(src);
-  };
-
-  const playDrum = (src) => {
-    audio.src = src;
-    audio.play();
+  const drumMachine = (event) => {
+    try {
+      const drumKeyCode = audioData.find(
+        (item) => item.key === event.key || item.key === event.target.innerText
+      );
+      displayCurrentDrum(drumKeyCode.title);
+      playNote(drumKeyCode);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const displayCurrentDrum = (item) => {
@@ -21,16 +21,29 @@ function App() {
     display.textContent = item ? item : "";
   };
 
-  const keyDown = (e) => {
-    const currentLetter = audioData.find(
-      (item) => item.letter === e.key.toUpperCase()
-    );
-    if (currentLetter.letter) {
-      console.log(`key press : ${e.key.toUpperCase()}, ${currentLetter.letter}`);
-      playDrum(currentLetter.src);
-      displayCurrentDrum(currentLetter.title);
-    } else {
-      console.log("No matching letter found");
+  const playNote = (item) => {
+    audio.src = item.src;
+    audio.currentTime = 0;
+    audio.play();
+    console.log(audio);
+  };
+
+  const keyDown = (event) => {
+    try {
+      const currentKey = audioData.find(
+        (item) => item.key === event.key.toUpperCase()
+      );
+      if (currentKey) {
+        console.log(
+          `key press: ${event.key.toUpperCase()} | key pad: ${currentKey.key}`
+        );
+        displayCurrentDrum(currentKey.title);
+        playNote(currentKey);
+      } else {
+        console.log(`No matching key found "${event.key.toUpperCase()}"`);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -41,14 +54,13 @@ function App() {
       <div id="drum-machine">
         {audioData.map((item, index) => (
           <div
-            key={`pad-${index}`}
+            key={index}
             className="drum-pad"
-            id={`button-${item.id}`}
-            onClick={() => drumMachine(item)}
-            onKeyDown={keyDown}
+            id={item.id}
+            onClick={(e) => drumMachine(e)}
           >
-            <audio className="clip" id={item.letter} src={item.src}></audio>
-            {item.letter}
+            {item.key}
+            <audio className="clip" id={item.key} src={item.src}></audio>
           </div>
         ))}
       </div>
